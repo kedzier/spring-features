@@ -15,12 +15,22 @@ public class MyListener {
 
     @EventListener//(condition = "#event.id < 100")
     public void myListeningMethod(MyEvent event) {
+        heavyOperation();
         LOG.info("Handling event [{}]", event);
     }
 
     @EventListener
     public void myTransactionalListeningMethod(MyAnotherEvent event) {
+        heavyOperation();
         LOG.info("Handling another event [{}]", event);
+    }
+
+    private void heavyOperation() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            LOG.error("interrupted", e);
+        }
     }
 
 }

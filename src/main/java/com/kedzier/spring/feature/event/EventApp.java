@@ -1,5 +1,7 @@
 package com.kedzier.spring.feature.event;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -44,14 +46,17 @@ public class EventApp implements CommandLineRunner {
 
         eventPublisher.publishEvent(new MyAnotherEvent(999L, "anotherEvent"));
 
-        MyEvent myEvent = new MyEvent(1L, "first");
-        eventPublisher.publishEvent(myEvent);
+        eventPublisher.publishEvent(new MyEvent(1L, "first"));
         eventPublisher.publishEvent(new MyEvent(2L, "second"));
         eventPublisher.publishEvent(new MyEvent(1000L, "third"));
+
+        LOG.info("Events published");
     }
 
     @Autowired
     private ApplicationEventPublisher eventPublisher;
+
+    private static final Logger LOG = LoggerFactory.getLogger(EventApp.class);
 
 }
 
