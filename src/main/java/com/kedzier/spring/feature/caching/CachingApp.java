@@ -18,18 +18,15 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableCaching
 public class CachingApp implements CommandLineRunner {
 
-
     public static void main(String[] args) {
         SpringApplication.run(CachingApp.class, args);
     }
 
     @Override
     public void run(String... strings) throws Exception {
-
         //demo.simpleEvictCachingDemo1();
         //demo.simpleEvictCachingDemo2();
         demo.smartCachingDemo();
-
     }
 
     @Bean

@@ -43,7 +43,7 @@ public class SmartCacheableCarRepository implements CarRepository {
     }
 
     @Override
-    @Cacheable(value = "cars", key = "")
+    @Cacheable(value = "cars")
     public Car getById(Long id) {
         LOG.debug(">> Searching for car with id [{}]", id);
 
