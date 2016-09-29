@@ -12,15 +12,15 @@ import java.util.concurrent.Future;
  * @author kedzierm
  */
 @Component
-public class AsyncDemo  {
+public class AsyncScenarios {
 
-    public void simpleAsyncDemo() {
-        for (int i = 0 ; i < 100 ; i++) {
+    public void simpleAsyncScenario() {
+        for (int i = 0 ; i < 10000 ; i++) {
             asyncExample.asyncMethod();
         }
     }
 
-    public void asyncWithReturnDemo() throws ExecutionException, InterruptedException {
+    public void asyncWithReturnScenario() throws ExecutionException, InterruptedException {
         Future<String> futureResult = asyncExample.asyncMethodWithReturn();
         LOG.info("Checking if task is done...");
         if (futureResult.isDone()) {
@@ -34,7 +34,7 @@ public class AsyncDemo  {
 
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(AsyncDemo.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AsyncScenarios.class);
 
     @Autowired
     private AsyncExample asyncExample;

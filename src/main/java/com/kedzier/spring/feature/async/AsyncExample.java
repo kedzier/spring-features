@@ -16,7 +16,7 @@ public class AsyncExample {
 
     private static final Logger LOG = LoggerFactory.getLogger(AsyncExample.class);
 
-    @Async("my")
+    @Async
     public void asyncMethod() {
         heavyOperation(1);
         LOG.info("I was executed in async way");

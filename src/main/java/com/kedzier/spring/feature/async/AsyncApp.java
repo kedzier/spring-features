@@ -1,20 +1,15 @@
 package com.kedzier.spring.feature.async;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.TaskScheduler;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import java.util.concurrent.Executor;
 
 /**
  * @author kedzierm
@@ -23,7 +18,6 @@ import java.util.concurrent.Executor;
 @Configuration
 @ComponentScan(basePackages = "com.kedzier.spring.feature.async")
 @EnableAsync
-@EnableScheduling
 public class AsyncApp implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -31,8 +25,7 @@ public class AsyncApp implements CommandLineRunner {
     }
 
     @Bean
-    @Qualifier("my")
-    public Executor myTaskExecutor() {
+    public TaskExecutor myTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setMaxPoolSize(3);
         taskExecutor.setCorePoolSize(3);
@@ -40,25 +33,18 @@ public class AsyncApp implements CommandLineRunner {
         return taskExecutor;
     }
 
-    @Bean
-    public TaskScheduler myTaskScheduler() {
-        ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler ();
-        taskScheduler.setPoolSize(3);
-        taskScheduler.setThreadNamePrefix("MY_SCHEDULER-thread-");
-        return taskScheduler;
-    }
-
     @Override
     public void run(String... strings) throws Exception {
 
         // 2 scenarios
-        //asyncDemo.simpleAsyncDemo();
-        //asyncDemo.asyncWithReturnDemo();
+        //asyncScenarios.simpleAsyncScenario();
+        asyncScenarios.asyncWithReturnScenario();
 
     }
 
     @Autowired
-    private AsyncDemo asyncDemo;
+    private AsyncScenarios asyncScenarios;
+
 
 }
 
