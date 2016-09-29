@@ -1,4 +1,4 @@
-package com.kedzier.spring.feature.async;
+package com.kedzier.spring.feature.scheduling;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +13,12 @@ public class ScheduleExample {
 
     private static final Logger LOG = LoggerFactory.getLogger(ScheduleExample.class);
 
+
     //@Scheduled(fixedRate = 2000L)
     //@Scheduled(fixedDelay = 2000L)
     //@Scheduled(cron = "30 0/1 * 1/1 * ?") // each minute, at 00:30
-    @Scheduled()
-    public void scheduleAtDate() {
+    @Scheduled(fixedRate = 500L)
+    public void schedule() {
         LOG.info("Running scheduled");
         heavyOperation(1);
     }
