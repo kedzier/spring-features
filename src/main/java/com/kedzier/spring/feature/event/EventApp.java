@@ -35,7 +35,7 @@ public class EventApp implements CommandLineRunner {
         return taskExecutor;
     }
 
-    //s@Bean
+    @Bean
     public ApplicationEventMulticaster applicationEventMulticaster() {
         SimpleApplicationEventMulticaster eventMulticaster = new SimpleApplicationEventMulticaster();
         eventMulticaster.setTaskExecutor(myTaskExecutor());
