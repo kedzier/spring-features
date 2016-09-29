@@ -11,14 +11,11 @@ import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author kedzierm
  */
 @SpringBootApplication
-@EnableTransactionManagement
 @ComponentScan(basePackages = "com.kedzier.spring.feature.event")
 public class EventApp implements CommandLineRunner {
 
@@ -42,7 +39,6 @@ public class EventApp implements CommandLineRunner {
         return eventMulticaster;
     }
 
-    @Transactional
     @Override
     public void run(String... strings) throws Exception {
 
@@ -52,9 +48,6 @@ public class EventApp implements CommandLineRunner {
         eventPublisher.publishEvent(myEvent);
         eventPublisher.publishEvent(new MyEvent(2L, "second"));
         eventPublisher.publishEvent(new MyEvent(1000L, "third"));
-
-
-        throw new RuntimeException("Rollback transaction");
     }
 
     @Autowired
